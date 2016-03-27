@@ -2,7 +2,11 @@
 
 #include "ofMain.h"
 #include "ofxSimpleSerial.h"
+#include "fft.h"
 #include "ofxGui.h"
+
+#define BUFFER_SIZE 256
+#define NUM_WINDOWS 80
 
 class ofApp : public ofBaseApp {
 
@@ -22,7 +26,7 @@ public:
 	ofSoundPlayer player;
 	float *fft;//FFT‰ğÍŒ‹‰Ê
 	float position;
-	float volume;
+	float volumeLow, volumeMid, volumeHigh;
 	float flatVolume;
 	ofxIntSlider nBandsToGet;//ü”g”‚Ì‰ğ‘œ“x
 
@@ -38,4 +42,6 @@ public:
 	//GUI
 	ofxPanel gui;
 	ofxFloatSlider colorFactor;
+
+	void audioReceived(float * input, int bufferSize, int nChannels);
 };
